@@ -108,13 +108,30 @@
     // console.log(filterDE);
     // 7. sort Exercise
     // Sort the people alphabetically by last name
-    var sortedPeople = people.sort( (a, b) => {
-      return b.toLowerCase() < a.toLowerCase(); 
+    var peopleFirstLast = people.map( person => {
+      var temp = person.split(',');
+      return {
+        first: temp[1],
+        last: temp[0]
+      }
     });
-    console.log(sortedPeople);
+
+    var sortedPeopleFirstLast = peopleFirstLast.sort( (a, b) => {
+      return a.last > b.last;
+    }) 
+    // console.log(sortedPeopleFirstLast);
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck'];
+    var instance = data.reduce( (acc, next) => {
+      if (acc[next] === undefined) {
+        acc[next] = 1;
+      } else {
+        acc[next]++;
+      }
+      return acc;
+    }, {});
+    console.log(instance);
   </script>
 </body>
 
