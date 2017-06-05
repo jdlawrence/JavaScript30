@@ -23,12 +23,20 @@
       <input type="text" name="item" placeholder="Item Name" required>
       <input type="submit" value="+ Add Item">
     </form>
+    <button id="check-all">Check All</button>
+    <button id="uncheck-all">UnCheck All</button>
+    <button id="delete-all">Delete All</button>
+
   </div>
 
 <script>
   const addItems = document.querySelector('.add-items');
   const itemsList = document.querySelector('.plates');
-  const items = JSON.parse(localStorage.getItem('items')) || [];
+  const checkAllButton = document.querySelector('#check-all');
+  const uncheckAllButton = document.querySelector('#uncheck-all');
+  const deleteAllButton = document.querySelector('#delete-all');
+  
+  let items = JSON.parse(localStorage.getItem('items')) || [];
 
   function addItem(e) {
     e.preventDefault(); 
@@ -37,13 +45,38 @@
       text,
       done: false
     };
-    console.log(item);
     items.push(item);
+    console.log('items', items);
     localStorage.setItem('items', JSON.stringify(items));
     populateList(items, itemsList);
     this.reset();
   }
   
+  function checkAll(e){
+    e.preventDefault();
+    items.forEach(item => {
+      console.log('item done', item.done);
+      item.done = true;
+    });
+    populateList(items, itemsList);
+  }
+
+  function uncheckAll(e){
+    e.preventDefault();
+    items.forEach(item => {
+      console.log('item done', item.done);
+      item.done = false;
+    });
+    populateList(items, itemsList);
+  }
+  
+  function deleteAll(e) {
+    e.preventDefault();
+    localStorage.removeItem('items');
+    items = JSON.parse(localStorage.getItem('items')) || [];
+    populateList(items, itemsList);
+  }
+
   function populateList(plates = [], plateList) {
     plateList.innerHTML = plates.map((plate, i) => {
       return `
@@ -65,7 +98,9 @@
 
   addItems.addEventListener('submit', addItem);
   itemsList.addEventListener('click', toggleDone);
-
+  checkAllButton.addEventListener('click', checkAll);
+  uncheckAllButton.addEventListener('click', uncheckAll);
+  deleteAllButton.addEventListener('click', deleteAll);
   populateList(items, itemsList);
 </script>
 
