@@ -7,6 +7,20 @@
 </head>
 <body>
 <script>
+  const secretCode = 'jj';
+  let keys = [];
+  document.addEventListener('keyup', (e) => {
+    keys.push(e.key);
+    if (keys.length > secretCode.length) {
+      keys.shift();
+    }
+    if (keys.join('') === secretCode) {
+      console.log('aaaayyyyyy');
+      cornify_add();
+    }
+    console.log('key', keys);
+
+  })
 </script>
 </body>
 </html>
