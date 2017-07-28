@@ -35,7 +35,7 @@
   const checkAllButton = document.querySelector('#check-all');
   const uncheckAllButton = document.querySelector('#uncheck-all');
   const deleteAllButton = document.querySelector('#delete-all');
-  
+  console.log('itemsLIst', itemsList); 
   let items = JSON.parse(localStorage.getItem('items')) || [];
 
   function addItem(e) {
@@ -73,7 +73,8 @@
   function deleteAll(e) {
     e.preventDefault();
     localStorage.removeItem('items');
-    items = JSON.parse(localStorage.getItem('items')) || [];
+    // items = JSON.parse(localStorage.getItem('items')) || [];
+    items = [];
     populateList(items, itemsList);
   }
 
@@ -90,6 +91,7 @@
   function toggleDone(e) {
     if (!e.target.matches('input')) return;
     const el = e.target;
+    console.log('target', el);
     const index = el.dataset.index; 
     items[index].done = !items[index].done;
     localStorage.setItem('items', JSON.stringify(items));
