@@ -182,6 +182,19 @@
     </li>
   </ul>
 <script>
-</script>
+  console.clear();
+  let videos = document.querySelectorAll('[data-time]');
+  let videosArr = [...videos];
+  let totalSeconds = videosArr.reduce((accum, videoEl) => {
+    let timeArr = videoEl.dataset.time.split(':');
+    let [minutes, seconds] = [parseInt(timeArr[0]), parseInt(timeArr[1])]; 
+    return accum + minutes * 60 + seconds;
+  }, 0)
+  let totalHour = Math.floor(totalSeconds / 3600);
+  let totalMin =  Math.floor(totalSeconds / 60) % 60
+  let totalSec = totalSeconds % 60;
+  console.log(totalSeconds,'hour', totalHour, 'min', totalMin, 'sec', totalSec);
+
+</script
 </body>
 </html>
