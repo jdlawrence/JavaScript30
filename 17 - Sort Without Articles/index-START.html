@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Sort Without Articles</title>
 </head>
+
 <body>
 
   <style>
@@ -25,10 +27,12 @@
       padding: 0;
       box-shadow: 0 0 0 20px rgba(0, 0, 0, 0.05);
     }
+
     #bands li {
       border-bottom: 1px solid #efefef;
       padding: 20px;
     }
+
     #bands li:last-child {
       border-bottom: 0;
     }
@@ -37,16 +41,30 @@
       color: #ffc600;
       text-decoration: none;
     }
-
   </style>
 
   <ul id="bands"></ul>
 
-<script>
-const bands = ['The Plot in You', 'The Devil Wears Prada', 'Pierce the Veil', 'Norma Jean', 'The Bled', 'Say Anything', 'The Midway State', 'We Came as Romans', 'Counterparts', 'Oh, Sleeper', 'A Skylit Drive', 'Anywhere But Here', 'An Old Dog'];
+  <script>
+    const bands = ['The Plot in You', 'The Devil Wears Prada', 'Pierce the Veil', 'Norma Jean', 'The Bled', 'Say Anything', 'The Midway State', 'We Came as Romans', 'Counterparts', 'Oh, Sleeper', 'A Skylit Drive', 'Anywhere But Here', 'An Old Dog'];
+    function removeArticle(word) {
+      const splitWord = word.split(' ');
+      const firstWord = splitWord[0];
+      if (firstWord === 'The' || firstWord === 'A' || firstWord === 'An') {
+        return splitWord.slice(1).join(' ');
+      }
+      return splitWord.join(' ');
+    }
+    const sortedBands = bands.sort((a, b) => removeArticle(a) < removeArticle(b) ? -1 : 1);
 
-
-</script>
+    console.log(sortedBands);
+    let bandText = sortedBands.map(band => {
+      return `<li>${band}</li>`
+    }).join('');
+    const bandEl = document.getElementById('bands');
+    bandEl.innerHTML = bandText;
+  </script>
 
 </body>
+
 </html>
