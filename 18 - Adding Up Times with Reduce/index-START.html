@@ -184,8 +184,9 @@
 <script>
   console.clear();
   let videos = document.querySelectorAll('[data-time]');
-  let videosArr = [...videos];
-  let totalSeconds = videosArr.reduce((accum, videoEl) => {
+  // let videosArr = [...videos];
+  // let totalSeconds = videosArr.reduce((accum, videoEl) => {
+    let totalSeconds = Array.prototype.reduce.call(videos, (accum, videoEl) => {
     let timeArr = videoEl.dataset.time.split(':');
     let [minutes, seconds] = [parseInt(timeArr[0]), parseInt(timeArr[1])]; 
     return accum + minutes * 60 + seconds;
